@@ -9,20 +9,30 @@ const CountriesContainer = () => {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [favourites, setFavourites] = useState([]);
 
+
+    //Calls getCountries when we start up. Without, we will have no countries!
     useEffect(() => {
         getCountries();
       }, [])
 
+
+    // Fetch method for our API
     const getCountries = () => {
+        // Grab the URL, returns the object as a pending Promise
         (fetch('https://restcountries.eu/rest/v2/all'))
+        // Treat the promise like a returned object, and callback
+        // Returns a Response object 
         .then(res => res.json())
+        // Need to add another .then to say what to do with it
         .then(countries => setCountries(countries));
     }
 
+    // When we select a country in our Select (options), set the selected country to it
     const onCountrySelected = (country) => setSelectedCountry(country);
 
+
+    // When we click add favourite, run this
     const addFavourite = (newFavourite) => {
-        // newFavourite.id = Date.now();
         const updatedFavourites = [...favourites, newFavourite];
         setFavourites(updatedFavourites)
     }
