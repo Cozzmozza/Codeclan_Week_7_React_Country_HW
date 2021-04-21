@@ -5,8 +5,14 @@ import PopulationTotal from '../components/PopulationTotal';
 import FavouritesList from '../components/FavouritesList';
 
 const CountriesContainer = () => {
+    // Initially empty countries array, till we fetch them
+    // This must be an empty array, not null. If it is null, we end up with one huge object that cannot be iterated
     const [countries, setCountries] = useState([]);
+
+    // Initial selectedCountry is none
     const [selectedCountry, setSelectedCountry] = useState(null);
+
+    // Initial favourites array is empty
     const [favourites, setFavourites] = useState([]);
 
 
@@ -39,9 +45,16 @@ const CountriesContainer = () => {
 
     return(
         <div>
+            {/* Grabs the population total, from all countries */}
             <PopulationTotal countries={countries}/>
+
+            {/* render the ability for a user to select an individual country from our options */}
             <CountrySelect countries={countries} onCountrySelected={onCountrySelected}/>
+
+            {/* If a country has been selected, render countrydetail, else don't */}
             {selectedCountry ? <CountryDetail selectedCountry={selectedCountry} addFavourite={addFavourite}/> : null}
+
+            {/* If favourites has > 0 items, render favouriteslist, else don't  */}
             {favourites.length > 0 ? <FavouritesList favourites={favourites}/> : null}
 
         </div>
