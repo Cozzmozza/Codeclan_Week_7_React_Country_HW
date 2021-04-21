@@ -11,6 +11,10 @@ const CountryDetail = ({selectedCountry, addFavourite}) => {
         <>
            <h3>Name: {selectedCountry.name}</h3>
             <img src={selectedCountry.flag} alt='The countries flag'/>
+           
+            {/* Button to add country to our favourites list
+            Using an onClick listner, calling handleclick() function.
+            Wrapped within another function so it isn't called immediately */}
             <button onClick={() => handleClick()}>Add to favourites</button>
         </>
     )
